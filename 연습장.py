@@ -1,9 +1,19 @@
-# arr = [1]
-# for i in range(len(arr)):
-# 	arr.append(i)
-# 	print(i)
+3 3
+0 0 0
+0 1 0
+0 0 0
+1 1 4
+1 1 3
 
-arr = [1]
-for i in arr:
-	arr.append(i)
-	print(i)
+
+#
+# 5 6
+# 0 0 0 0 0 0
+# 0 1 1 0 1 0
+# 0 1 0 0 0 0
+# 0 0 1 1 1 0
+# 1 0 0 0 0 0
+# 4 2 3
+# 1 6 2
+
+#답은 8
