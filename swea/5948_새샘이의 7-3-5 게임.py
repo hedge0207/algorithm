@@ -1,12 +1,12 @@
 import sys
 sys.stdin = open("5948_input.txt", "r")
 
-
 def f(k, s, c):
     if k == 3:
-        sum_list.append(s)
+        if s not in sum_list:
+            sum_list.append(s)
     else:
-        for i in range(len(num_l)):
+        for i in range(7):
             if visited[i] == 1:
                 continue
             else:
@@ -44,6 +44,4 @@ for tc in range(1, int(input()) + 1):
     f(0, 0, 0)
 
     quick(sum_list, 0, len(sum_list) - 1)
-
-    print(sum_list)
-    print(sum_list[-5])
+    print("#{} {}".format(tc,sum_list[-5]))
