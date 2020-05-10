@@ -1,9 +1,10 @@
-import sys
-sys.stdin=open("9700_input.txt","r")
+a = [1,2]
+b = [3,4]
+c = [5,6]
+t = []
+t.append(a)
+t.append(b)
 
-for tc in range(1,int(input())+1):
-    p,q = map(float,input().split())
-    if (1-p)*q<p*(1-q)*q:
-        print("#{} YES".format(tc))
-    else:
-        print("#{} NO".format(tc))
+if c not in t:
+    print("AA")
+print(t)
