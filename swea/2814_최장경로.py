@@ -1,5 +1,4 @@
 import sys
-
 sys.stdin = open("2814_input.txt", "r")
 
 
