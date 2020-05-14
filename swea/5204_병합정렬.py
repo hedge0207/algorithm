@@ -1,6 +1,14 @@
+import sys
+sys.stdin=open("5204_input.txt",'r')
+
 def merge(list1, list2):
+    global cnt
     i = 0
     j = 0
+    le = list1[-1]
+    re = list2[-1]
+    if le>re:
+        cnt+=1
 
     result = []
 
@@ -13,9 +21,9 @@ def merge(list1, list2):
             i += 1
 
     if i == len(list1):
-        result+=list2[j:]  #이 부분을 append로 쓸 경우 오류가 발생
-    if j==len(list2):  #else로 쓸 경우 특정 배열에서는 에러가 발생 반드시 if로 써야 한다.
-        result+=list1[i:]  #이 부분을 append로 쓸 경우 오류가 발생
+        result+=list2[j:]
+    if j == len(list2):
+        result+=list1[i:]
     return result
 
 
@@ -28,5 +36,9 @@ def merge_sort(my_list):
 
     return merge(merge_sort(lh), merge_sort(rh))
 
-
-print(merge_sort([13,7,1,12,8,4,2,8,7]))
+for tc in range(1,int(input())+1):
+    N = int(input())
+    arr = list(map(int,input().split()))
+    cnt=0
+    sarr=merge_sort(arr)
+    print("#{} {} {}".format(tc,sarr[N//2],cnt))
