@@ -32,7 +32,7 @@ def find_set(x):
     if p[x]==x:
         return x
     else:
-        p[x]=find_set(p[x]) #부모 노드를 대표자로 갱신
+        p[x]=find_set(p[x]) #부모 노드를 대표자로 갱신, path compresion
         return p[x]
 
 def union(x,y):
@@ -40,7 +40,7 @@ def union(x,y):
     py = find_set(y) #py는 y의 대표자
     if rank[px]>rank[py]:   #px의 깊이가 py의 길이보다 크면
         p[py]=px            #px가 대표가 된다.
-    else:                   #py의 깊이거 길면
+    else:                   #py의 깊이가 길거나 둘의 깊이가 같으면
         p[px]=py            #py가 대표가 된다.
         if rank[px]==rank[py]:  #만일 둘의 깊이가 같으면
             rank[py]+=1         #대표가 된 py의 깊이에 +1을 해준다.
