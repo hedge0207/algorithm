@@ -15,50 +15,50 @@ input(시작정점, 끝 정점, 가중치 순)
 '''
 
 # Prim 알고리즘
-# V, E = map(int, input().split())
-# adj = [[0] * V for _ in range(V)]  #인접행렬
-# 
-# for i in range(E):
-#     s, e, c = map(int, input().split())
-#     #무향 그래프
-#     adj[s][e] = c   #가중치 c를 넣어준다.
-#     adj[e][s] = c
-# 
-# # 가중치, 부모정점, MST 준비
-# INF = float('inf')  #가중치를 큰 값으로 초기화 하기 위한 값
-# key = [INF] * V  # 가중치
-# p = [-1] * V  # 부모 정점
-# mst = [False] * V  # MST, 선택한 정점을 저장하기 위한 리스트
-# 
-# # 시작점 선택: 0번 선택
-# key[0] = 0
-# cnt = 0
-# result = 0  #MST(가중치의 최소합)을 저장할 변수
-# while cnt < V:
-#     # 아직 MST가 아니고 key가 최소인 정점 u를 선택
-#     Min = INF
-#     u = -1  #아래에서 u를 쓰기 위해 -1로 초기화
-#     #for문을 돌면 가장 작은 가중치가 Min에 들어가게 되고 가중치가 가장 작은 정점이 u로 들어가게 된다.
-#     for i in range(V):
-#         if not mst[i] and key[i] < Min:   #MST가 아니고 u와의 사이에서 가중치가 현재 가중치보다 작으면
-#             Min = key[i] #가중치를 Min에 저장하고
-#             u = i  #정점 번호를 u에 저장
-# 
-#     # u를 MST로 선택(새로운 정점으로 선택)
-#     mst[u] = True
-#     result += Min
-#     cnt += 1
-# 
-#     # key 값을 갱신
-#     #u에 인접하면서 아직 MST가 아닌 정점 w에서 key[w]>u ↔ w 면(현재 저장된 가중치가 현재 선택된 정점 u와의 사이에서 가중치가 크면) 갱신
-#     for w in range(V):
-#         if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:   #가중치가 양수이고(adj[u][w]>0) MST로 선택한 적이 없으며(not mst[w]) key[w]>u ↔ w 면
-#             key[w] = adj[u][w]  #가중치를 갱신
-#             p[w] = u  #부모 정점을 u로 갱신
-# 
-# print(key)
-# print(p)
-# print(result)
+V, E = map(int, input().split())
+adj = [[0] * V for _ in range(V)]  #인접행렬
+
+for i in range(E):
+    s, e, c = map(int, input().split())
+    #무향 그래프
+    adj[s][e] = c   #가중치 c를 넣어준다.
+    adj[e][s] = c
+
+# 가중치, 부모정점, MST 준비
+INF = float('inf')  #가중치를 큰 값으로 초기화 하기 위한 값
+key = [INF] * V  # 가중치
+p = [-1] * V  # 부모 정점
+mst = [False] * V  # MST, 선택한 정점을 저장하기 위한 리스트
+
+# 시작점 선택: 0번 선택
+key[0] = 0
+cnt = 0
+result = 0  #MST(가중치의 최소합)을 저장할 변수
+while cnt < V:
+    # 아직 MST가 아니고 key가 최소인 정점 u를 선택
+    Min = INF
+    u = -1  #아래에서 u를 쓰기 위해 -1로 초기화
+    #for문을 돌면 가장 작은 가중치가 Min에 들어가게 되고 가중치가 가장 작은 정점이 u로 들어가게 된다.
+    for i in range(V):
+        if not mst[i] and key[i] < Min:   #MST가 아니고 u와의 사이에서 가중치가 현재 가중치보다 작으면
+            Min = key[i] #가중치를 Min에 저장하고
+            u = i  #정점 번호를 u에 저장
+
+    # u를 MST로 선택(새로운 정점으로 선택)
+    mst[u] = True
+    result += Min
+    cnt += 1
+
+    # key 값을 갱신
+    #u에 인접하면서 아직 MST가 아닌 정점 w에서 key[w]>u ↔ w 면(현재 저장된 가중치가 현재 선택된 정점 u와의 사이에서 가중치가 크면) 갱신
+    for w in range(V):
+        if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:   #가중치가 양수이고(adj[u][w]>0) MST로 선택한 적이 없으며(not mst[w]) key[w]>u ↔ w 면
+            key[w] = adj[u][w]  #가중치를 갱신
+            p[w] = u  #부모 정점을 u로 갱신
+
+print(key)
+print(p)
+print(result)
 
 
 
@@ -118,56 +118,56 @@ input(시작정점, 끝 정점, 가중치 순)
 
 
 # KRUSKAL
-def make_set(x):
-    p[x] = x
-
-
-def find_set(x):
-    if p[x] == x:
-        return x
-    else:
-        p[x] = find_set(p[x])
-        return p[x]
-
-
-def union(x, y):
-    px = find_set(x)
-    py = find_set(y)
-    if rank[px]>rank[py]:
-        p[py] = px
-    else:
-        p[px] = py
-        if rank[px]==rank[py]:
-            rank[py]+=1
-
-V, E = map(int, input().split())
-edges = [list(map(int, input().split())) for _ in range(E)]
-# 간선을 간선가중치를 기준으로 정렬
-edges.sort(key=lambda x: x[2])
-
-# 모든 정점에 대해 집합 생성
-p = [0] * V
-rank = [0] * V
-for i in range(V):
-    make_set(i)
-
-cnt = 0  #선택된 간선의 개수를 새는 변수
-result = 0
-mst = []
-# 모든 간선에 대해서 반복 -> V-1개의 간선이 선택될때까지
-for i in range(E):
-    #시작 정점, 끝 정점, 가중치
-    s,e,c = edges[i][0],edges[i][1],edges[i][2]
-    #사이클이면 스킵: 두 정점의 대표자가 같으면 스킵
-    if find_set(s)==find_set(e):
-        continue
-    # 간선 선택: mst에 간선 정보 더하기, 두 정점을 합친다 => union
-    result += c
-    mst.append(edges[i])
-    union(s,e)
-    cnt+=1
-    if cnt==V-1:
-        break
-
-print(result)
-print(mst)
+# def make_set(x):
+#     p[x] = x
+#
+#
+# def find_set(x):
+#     if p[x] == x:
+#         return x
+#     else:
+#         p[x] = find_set(p[x])
+#         return p[x]
+#
+#
+# def union(x, y):
+#     px = find_set(x)
+#     py = find_set(y)
+#     if rank[px]>rank[py]:
+#         p[py] = px
+#     else:
+#         p[px] = py
+#         if rank[px]==rank[py]:
+#             rank[py]+=1
+#
+# V, E = map(int, input().split())
+# edges = [list(map(int, input().split())) for _ in range(E)]
+# # 간선을 간선가중치를 기준으로 정렬
+# edges.sort(key=lambda x: x[2])
+#
+# # 모든 정점에 대해 집합 생성
+# p = [0] * V
+# rank = [0] * V
+# for i in range(V):
+#     make_set(i)
+#
+# cnt = 0  #선택된 간선의 개수를 새는 변수
+# result = 0
+# mst = []
+# # 모든 간선에 대해서 반복 -> V-1개의 간선이 선택될때까지
+# for i in range(E):
+#     #시작 정점, 끝 정점, 가중치
+#     s,e,c = edges[i][0],edges[i][1],edges[i][2]
+#     #사이클이면 스킵: 두 정점의 대표자가 같으면 스킵
+#     if find_set(s)==find_set(e):
+#         continue
+#     # 간선 선택: mst에 간선 정보 더하기, 두 정점을 합친다 => union
+#     result += c
+#     mst.append(edges[i])
+#     union(s,e)
+#     cnt+=1
+#     if cnt==V-1:
+#         break
+#
+# print(result)
+# print(mst)
