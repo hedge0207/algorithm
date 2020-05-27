@@ -54,7 +54,7 @@ while cnt < V:
     for w in range(V):
         if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:   #가중치가 양수이고(adj[u][w]>0) MST로 선택한 적이 없으며(not mst[w]) key[w]>u ↔ w 면
             key[w] = adj[u][w]  #가중치를 갱신
-            p[w] = u  #부모 정점을 u로 갱신
+            p[w] = u  #현재까지는 u에서 w의 거리가 가장 가까우므로 부모 정점을 u로 갱신
 
 print(key)
 print(p)
