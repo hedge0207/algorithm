@@ -12,12 +12,12 @@ input
 6 8 6
 7 8 2
 '''
-
+#Prim 알고리즘과 거의 동일
 def DIJKSTRA_ARRAY(s):
-    D = [0xfffff] * (V + 1)  #시작정점부터 정점까지의 현재까지 알아낸 최단 거리
+    D = [0xfffff] * (V + 1)  #시작정점부터 각 정점까지의 현재까지 알아낸 최단 거리
     P = [i for i in range(V + 1)]  #부모 노드를 저장할 배열(초기에는 자기 자신을 부모로)
     visit = [False] * (V + 1)   #선택 여부를 저장할 배열
-    D[s] = 0
+    D[s] = 0  #시작점을 선택
 
     cnt = V
     while cnt:                              # 정점의 수 만큼 반복

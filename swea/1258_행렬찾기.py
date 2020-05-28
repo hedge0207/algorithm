@@ -1,5 +1,5 @@
 import sys
-sys.stdin = open("SW7_input.txt", "r")
+sys.stdin = open("1258_input.txt", "r")
 
 T = int(input())
 for tc in range(1, T + 1):

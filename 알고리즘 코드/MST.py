@@ -16,7 +16,7 @@ input(시작정점, 끝 정점, 가중치 순)
 
 # Prim 알고리즘
 V, E = map(int, input().split())
-adj = [[0] * V for _ in range(V)]  #인접행렬
+adj = [[0] * V for _ in range(V)]  #인접행렬, 만일 인접 리스트로 구현하고 싶다면 아래 방식으로는 불가능, 우선순위 큐를 사용해야 한다.
 
 for i in range(E):
     s, e, c = map(int, input().split())
@@ -52,7 +52,8 @@ while cnt < V:
     # key 값을 갱신
     #u에 인접하면서 아직 MST가 아닌 정점 w에서 key[w]>u ↔ w 면(현재 저장된 가중치가 현재 선택된 정점 u와의 사이에서 가중치가 크면) 갱신
     for w in range(V):
-        if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:   #가중치가 양수이고(adj[u][w]>0) MST로 선택한 적이 없으며(not mst[w]) key[w]>u ↔ w 면
+        #가중치가 양수이고(adj[u][w]>0, 만일 가중치가 양수가 존재하면 조건을 삭제하면 된다.) MST로 선택한 적이 없으며(not mst[w]) key[w]>u ↔ w 면
+        if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:
             key[w] = adj[u][w]  #가중치를 갱신
             p[w] = u  #현재까지는 u에서 w의 거리가 가장 가까우므로 부모 정점을 u로 갱신
 
@@ -87,6 +88,7 @@ print(result)
 # #큐에 시작 정점을 넣음, (key,정점인덱스)형태로 넣는다.
 # #첫 번째 인자는 값을 어디에 넣을지(배열 정보), 두 번째 인자는 어떤 원소를 집어 넣을지를 입력(원소의 첫 번째 요소로 우선순위 판단)
 # #heapq.heappush(추가할 배열,(우선순위를 판단할 원소,원소2)), 튜플이 아닌 원소 하나만 넣어도 된다. 튜플일 경우 가장 앞의 원소로 우선순위를 판단한다.
+# #pq에 (가중치, 노드)를 넣는다.
 # heapq.heappush(pq,(0,0))  #키를 우선순위로 하는 우선순위 큐
 #
 # result = 0
@@ -171,3 +173,4 @@ print(result)
 #
 # print(result)
 # print(mst)
+

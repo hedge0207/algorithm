@@ -54,27 +54,40 @@ N = len(arr)
 #     result.pop()
 
 #인덱스 기반으로 체크, 재귀호출과 똑같은 방식
-visit = [0]*N
-result=[]
-for i in range(N):
-    result.append(arr[i])
-    visit[i]=1
-    for j in range(N):
-        if visit[j]:
-            continue
-        result.append(arr[j])
-        visit[j] = 1
-        for k in range(N):
-            if visit[k]:
-                continue
-            result.append(arr[k])
-            visit[k] = 1
+# visit = [0]*N
+# result=[]
+# for i in range(N):
+#     result.append(arr[i])
+#     visit[i]=1
+#     for j in range(N):
+#         if visit[j]:
+#             continue
+#         result.append(arr[j])
+#         visit[j] = 1
+#         for k in range(N):
+#             if visit[k]:
+#                 continue
+#             result.append(arr[k])
+#             visit[k] = 1
+#
+#             print(result)
+#
+#             result.pop()
+#             visit[k] = 0
+#         result.pop()
+#         visit[j] = 0
+#     result.pop()
+#     visit[i] = 0
 
-            print(result)
 
-            result.pop()
-            visit[k] = 0
-        result.pop()
-        visit[j] = 0
-    result.pop()
-    visit[i] = 0
+#재귀를 사용한 순열
+def perm(n,k):
+    if n==k:
+        print(a)
+    else:
+        for i in range(k,n):
+            a[i],a[k]=a[k],a[i]
+            perm(n,k+1)
+            a[k],a[i]=a[i],a[k]
+a = [1,2,3]
+perm(3,0)

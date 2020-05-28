@@ -1,36 +1,36 @@
+# Prim
+import heapq
 V, E = map(int, input().split())
-adj = [[0] * (V+1) for _ in range(V+1)]
+adj = [[] for _ in range(V+1)]
 
 for i in range(E):
     s, e, c = map(int, input().split())
-    adj[s][e] = c
-    adj[e][s] = c
+    adj[s].append([e,c])
+    adj[e].append([s,c])
 
 
 INF = float('inf')
 key = [INF] * (V+1)
 mst = [False] * (V+1)
 
-key[1] = 0
-cnt = 0
+pq = []
+
+key[1] = 1
+heapq.heappush(pq,[0,1])
+
 result = 0
-while cnt < V:
+while pq:
+    k,node = heapq.heappop(pq)
 
-    Min = INF
-    u = -1
+    if mst[node]:
+        continue
 
-    for i in range(1,V+1):
-        if not mst[i] and key[i] < Min:
-            Min = key[i]
-            u = i
+    mst[node]=True
+    result+=k
 
-
-    mst[u] = True
-    result += Min
-    cnt += 1
-
-    for w in range(1,V+1):
-        if not mst[w] and key[w] > adj[u][w]:
-            key[w] = adj[u][w]
+    for d,w in adj[node]:
+        if not mst[d] and key[d]>w:
+            key[d]=w
+            heapq.heappush(pq,[key[d],d])
 
 print(result)

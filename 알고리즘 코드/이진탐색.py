@@ -5,7 +5,7 @@ def binary_search_recursion(st, ed, t):
 
     m = (st + ed) // 2
 
-    if t == arr[m]:
+    if t == arr[m]: #값을 찾았으면 index를 반환
         return m
 
     elif t < arr[m]:
