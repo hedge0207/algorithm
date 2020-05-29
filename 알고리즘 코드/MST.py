@@ -168,7 +168,7 @@ print(result)
 #     mst.append(edges[i])
 #     union(s,e)
 #     cnt+=1
-#     if cnt==V-1:
+#     if cnt==V-1:  #모든 정점이 선택됐다면 break
 #         break
 #
 # print(result)
