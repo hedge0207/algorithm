@@ -11,7 +11,7 @@ input
 5 7 1
 6 8 6
 7 8 2
-'''
+'''*
 #Prim 알고리즘과 거의 동일
 def DIJKSTRA_ARRAY(s):
     D = [0xfffff] * (V + 1)  #시작정점부터 각 정점까지의 현재까지 알아낸 최단 거리
@@ -21,7 +21,7 @@ def DIJKSTRA_ARRAY(s):
 
     cnt = V
     while cnt:                              # 정점의 수 만큼 반복
-        u, MIN = 0, 0xfffff                 # D[] 가 최소인 정점 찾기
+        u, MIN = 0, 0xfffff                 # D[] 가 최소인 정점 찾기*
         for i in range(1, V + 1):
             if not visit[i] and D[i] < MIN:  #선택 기준이 '시작'정점에서 부터의 거리라는 것에 주의해야 한다.
                 u, MIN = i, D[i]  #for문이 끝나면 u에는 거리가 가장 가까운 정점이 담기게 된다.
