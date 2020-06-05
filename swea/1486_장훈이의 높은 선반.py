@@ -1,26 +1,47 @@
 import sys
 sys.stdin = open("1486_input.txt", "r")
 
+def f(k,sl):
+    global Min
+    if k==N:
+        if sl>=B and Min>sl:
+            Min=sl
+        return
+    f(k+1,sl+length[k])
+    f(k+1,sl)
+
+
+
 T = int(input())
 for tc in range(1,T+1):
     N,B = map(int,input().split())
     length = list(map(int, input().split()))
+    Min = 0xffffff
+    f(0,0)
+    print("#{} {}".format(tc,Min-B))
 
-    slist = []
-    for i in range(1<<N):
-        a = 0
-        for j in range(N+1):
-            if i & (1<<j):
-                a += length[j]
-            if a >= B:
-                slist.append(a)
 
-    result = []
-    for i in range(len(slist)):
-        if slist[i] > B:
-            result.append(slist[i])
-
-    print("#{} {}".format(tc, min(slist) - B))
+# 반복문 풀이
+# T = int(input())
+# for tc in range(1,T+1):
+#     N,B = map(int,input().split())
+#     length = list(map(int, input().split()))
+#
+#     slist = []
+#     for i in range(1<<N):
+#         a = 0
+#         for j in range(N+1):
+#             if i & (1<<j):
+#                 a += length[j]
+#             if a >= B:
+#                 slist.append(a)
+#
+#     result = []
+#     for i in range(len(slist)):
+#         if slist[i] > B:
+#             result.append(slist[i])
+#
+#     print("#{} {}".format(tc, min(slist) - B))
 
 
     # 처음엔 아래와 같이 했으나 시간초과 발생
