@@ -15,47 +15,91 @@ input(시작정점, 끝 정점, 가중치 순)
 '''
 
 # Prim 알고리즘
+# V, E = map(int, input().split())
+# adj = [[0] * V for _ in range(V)]  #인접행렬, 만일 인접 리스트로 구현하고 싶다면 아래 방식으로는 불가능, 우선순위 큐를 사용해야 한다.
+#
+# for i in range(E):
+#     s, e, c = map(int, input().split())
+#     #무향 그래프
+#     adj[s][e] = c   #가중치 c를 넣어준다.
+#     adj[e][s] = c
+#
+# # 가중치, 부모정점, MST 준비
+# INF = float('inf')  #가중치를 큰 값으로 초기화 하기 위한 값
+# key = [INF] * V  # 가중치
+# p = [-1] * V  # 부모 정점
+# mst = [False] * V  # MST, 선택한 정점을 저장하기 위한 리스트
+#
+# # 시작점 선택: 0번 선택
+# key[0] = 0
+# cnt = 0
+# result = 0  #MST(가중치의 최소합)을 저장할 변수
+# while cnt < V:
+#     # 아직 MST가 아니고 key가 최소인 정점 u를 선택
+#     Min = INF
+#     u = -1  #아래에서 u를 쓰기 위해 -1로 초기화
+#     #for문을 돌면 가장 작은 가중치가 Min에 들어가게 되고 가중치가 가장 작은 정점이 u로 들어가게 된다.
+#     for i in range(V):
+#         if not mst[i] and key[i] < Min:   #MST가 아니고 u와의 사이에서 가중치가 현재 가중치보다 작으면
+#             Min = key[i] #가중치를 Min에 저장하고
+#             u = i  #정점 번호를 u에 저장
+#
+#     # u를 MST로 선택(새로운 정점으로 선택)
+#     mst[u] = True
+#     result += Min
+#     cnt += 1
+#
+#     # key 값을 갱신
+#     #u에 인접하면서 아직 MST가 아닌 정점 w에서 key[w]>(u ↔ w) 면(현재 저장된 가중치가 현재 선택된 정점 u와의 사이에서 가중치보다 크면) 갱신
+#     for w in range(V):
+#         #가중치가 양수이고(adj[u][w]>0, 만일 가중치에 음수가 존재하면 조건을 삭제하면 된다.) MST로 선택한 적이 없으며(not mst[w]) key[w]>(u ↔ w) 면
+#         if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:
+#             key[w] = adj[u][w]  #가중치를 갱신
+#             p[w] = u  #현재까지는 u에서 w의 거리가 가장 가까우므로 부모 정점을 u로 갱신
+#
+# print(key)
+# print(p)
+# print(result)
+
+
+
+#인접리스트로 구현
 V, E = map(int, input().split())
-adj = [[0] * V for _ in range(V)]  #인접행렬, 만일 인접 리스트로 구현하고 싶다면 아래 방식으로는 불가능, 우선순위 큐를 사용해야 한다.
+adj = [[] for _ in range(V)]
 
 for i in range(E):
     s, e, c = map(int, input().split())
     #무향 그래프
-    adj[s][e] = c   #가중치 c를 넣어준다.
-    adj[e][s] = c
+    adj[s].append((e,c))
+    adj[e].append((s,c))
 
-# 가중치, 부모정점, MST 준비
-INF = float('inf')  #가중치를 큰 값으로 초기화 하기 위한 값
-key = [INF] * V  # 가중치
-p = [-1] * V  # 부모 정점
-mst = [False] * V  # MST, 선택한 정점을 저장하기 위한 리스트
+print(adj)
+INF = float('inf')
+key = [INF] * V
+p = [-1] * V
+mst = [False] * V
 
-# 시작점 선택: 0번 선택
+
 key[0] = 0
 cnt = 0
-result = 0  #MST(가중치의 최소합)을 저장할 변수
+result = 0
 while cnt < V:
-    # 아직 MST가 아니고 key가 최소인 정점 u를 선택
     Min = INF
-    u = -1  #아래에서 u를 쓰기 위해 -1로 초기화
-    #for문을 돌면 가장 작은 가중치가 Min에 들어가게 되고 가중치가 가장 작은 정점이 u로 들어가게 된다.
-    for i in range(V):
-        if not mst[i] and key[i] < Min:   #MST가 아니고 u와의 사이에서 가중치가 현재 가중치보다 작으면
-            Min = key[i] #가중치를 Min에 저장하고
-            u = i  #정점 번호를 u에 저장
+    u = -1
 
-    # u를 MST로 선택(새로운 정점으로 선택)
+    for i in range(V):
+        if not mst[i] and key[i] < Min:
+            Min = key[i]
+            u = i
+
     mst[u] = True
     result += Min
     cnt += 1
 
-    # key 값을 갱신
-    #u에 인접하면서 아직 MST가 아닌 정점 w에서 key[w]>u ↔ w 면(현재 저장된 가중치가 현재 선택된 정점 u와의 사이에서 가중치가 크면) 갱신
-    for w in range(V):
-        #가중치가 양수이고(adj[u][w]>0, 만일 가중치가 양수가 존재하면 조건을 삭제하면 된다.) MST로 선택한 적이 없으며(not mst[w]) key[w]>u ↔ w 면
-        if adj[u][w]>0 and not mst[w] and key[w] > adj[u][w]:
-            key[w] = adj[u][w]  #가중치를 갱신
-            p[w] = u  #현재까지는 u에서 w의 거리가 가장 가까우므로 부모 정점을 u로 갱신
+    for v,w in adj[u]:
+        if w>0 and not mst[v] and key[v] > w:
+            key[v] = w
+            p[v] = u
 
 print(key)
 print(p)
