@@ -12,3 +12,7 @@ def f(A, B):
 A, B, C = map(int, input().split())
 
 print(f(A, B) % C)
+
+#참고
+# https://hwiyong.tistory.com/369
+# https://mygumi.tistory.com/319
