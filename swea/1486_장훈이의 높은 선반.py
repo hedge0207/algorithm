@@ -1,22 +1,47 @@
 import sys
 sys.stdin = open("1486_input.txt", "r")
 
-def f(k,sl):
+# def f(k,sl):
+#     global Min
+#     if k==N:
+#         if sl>=B and Min>sl:
+#             Min=sl
+#         return
+#     f(k+1,sl+length[k])
+#     f(k+1,sl)
+#
+#
+#
+# T = int(input())
+# for tc in range(1,T+1):
+#     N,B = map(int,input().split())
+#     length = list(map(int, input().split()))
+#     Min = 0xffffff
+#     f(0,0)
+#     print("#{} {}".format(tc,Min-B))
+
+
+#약간 개선
+def f(k,s):
     global Min
-    if k==N:
-        if sl>=B and Min>sl:
-            Min=sl
+    if s>Min:
         return
-    f(k+1,sl+length[k])
-    f(k+1,sl)
-
-
+    if k==N:
+        if s>=B and s<Min:
+            Min=s
+        return
+    subset.append(heigth[k])
+    f(k+1,s+heigth[k])
+    subset.pop()
+    f(k+1,s)
 
 T = int(input())
+
 for tc in range(1,T+1):
     N,B = map(int,input().split())
-    length = list(map(int, input().split()))
-    Min = 0xffffff
+    heigth = list(map(int,input().split()))
+    Min=200000
+    subset = []
     f(0,0)
     print("#{} {}".format(tc,Min-B))
 
