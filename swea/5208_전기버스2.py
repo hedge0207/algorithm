@@ -3,7 +3,7 @@ sys.stdin=open("5208_input.txt",'r')
 
 def f(k,d,c):  #k는 재귀의 깊이(정류장 번호), d는 배터리, c는 교환 횟수
     global cnt
-    if k+1+d>=N:  #k+1을 해준 이유는 문제에서는 1번 정류장 부터 시작하는데 코드는 0번 부터 시작하는 것로 짰기 때문
+    if k+1+d>=N:  #k+1을 해준 이유는 문제에서는 1번 정류장 부터 시작하는데 코드는 0번 부터 시작하는 것으로 짰기 때문
         if cnt>c:
             cnt=c
     if c>cnt or k>=len(bat):
