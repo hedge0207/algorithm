@@ -10,14 +10,14 @@ N = len(arr)
             
             
 #가장 원시작인 방법(중복 미포함)
-# for i in range(N):
-#     for j in range(N):
-#         if i==j:
-#             continue
-#         for k in range(N):
-#             if k==i or k ==j:
-#                 continue
-#             print(arr[i],arr[j],arr[k])
+for i in range(N):
+    for j in range(N):
+        if i==j:
+            continue
+        for k in range(N):
+            if k==i or k ==j:
+                continue
+            print(arr[i],arr[j],arr[k])
 
 #아래와 같이 하면 제대로 작동하지 않는다.
 # result = []
@@ -81,13 +81,13 @@ N = len(arr)
 
 
 #재귀를 사용한 순열
-def perm(n,k):
-    if n==k:
-        print(a)
-    else:
-        for i in range(k,n):
-            a[i],a[k]=a[k],a[i]
-            perm(n,k+1)
-            a[k],a[i]=a[i],a[k]
-a = [1,2,3]
-perm(3,0)
+# def perm(n,k):
+#     if n==k:
+#         print(a)
+#     else:
+#         for i in range(k,n):
+#             a[i],a[k]=a[k],a[i]
+#             perm(n,k+1)
+#             a[k],a[i]=a[i],a[k]
+# a = [1,2,3]
+# perm(3,0)
