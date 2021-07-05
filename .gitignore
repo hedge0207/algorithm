@@ -1,4 +1,4 @@
 *.txt
-.idea
-.metadata
-venv
+.idea/
+.metadata/
+venv/
