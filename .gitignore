@@ -3,3 +3,4 @@
 .metadata/
 venv/
 .vescode/
+test.py
