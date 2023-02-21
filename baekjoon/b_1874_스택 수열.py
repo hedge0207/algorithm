@@ -1,21 +1,24 @@
-n = int(input())
-lst = [int(input()) for _ in range(n)]
-stack = []
-result = ''
-num = 1
-idx = 0
+import sys
 
-while idx < n:
-    if len(stack) != 0 and stack[-1] == lst[idx]:
+input = sys.stdin.readline
+
+N = int(input())
+nums = [int(input()) for _ in range(N)]
+
+stack = []
+idx = 0
+result = []
+
+for i in range(1, N+1):
+    stack.append(i)
+    result.append("+")
+
+    while stack[-1] == nums[idx]:
         stack.pop()
         idx += 1
-        result += '-'
-    elif num <= n:
-        stack.append(num)
-        num += 1
-        result += "+"
-    else:
-        break
+        result.append("-")
+        if len(stack)==0:
+            break
 
 if stack:
     print("NO")
