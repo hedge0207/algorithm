@@ -27,11 +27,6 @@ class LinkedList:
                 node.prev = self.head
                 self.head.post = node
             self.tail = node
-        elif self.cur == None:
-            node.post = self.head.post
-            node.prev = self.head
-            self.head.post = node
-            self.head.post.prev = node
         else:
             node.post = self.cur.post
             node.prev = self.cur
