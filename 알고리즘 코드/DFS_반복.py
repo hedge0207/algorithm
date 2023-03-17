@@ -22,7 +22,7 @@ for i in range(E):
     s,e = edges[2*i], edges[2*i+1]
     #무향 그래프일 경우
     adj[s][e]=1
-    adj[e][s]=1
+    # adj[e][s]=1
 print(adj)
 dfs(1)
 
