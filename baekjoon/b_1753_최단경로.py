@@ -1,19 +1,3 @@
-"""
-N, M
-start_vertex
-st, ed, cost
-6 8
-1
-1 2 3
-1 3 2
-1 4 5
-2 3 2
-2 5 8
-3 4 2
-4 5 6
-5 6 1
-"""
-
 from collections import defaultdict
 import heapq
 import sys
@@ -26,7 +10,6 @@ MAX_COST = float("infinity")
 distances = [MAX_COST] * (N + 1)
 START_VERTEX = int(input())
 distances[START_VERTEX] = 0
-pre = [0] * (N + 1)
 
 graph = defaultdict(list)
 
@@ -45,8 +28,10 @@ while queue:
         new_dist = cur_dist + new_dist
         if new_dist < distances[neighbor]:
             distances[neighbor] = new_dist
-            pre[neighbor] = cur
             heapq.heappush(queue, (new_dist, neighbor))
 
-print(distances[1:])
-print(pre[1:])
+for i in distances[1:]:
+    if i < MAX_COST:
+        print(i)
+    else:
+        print("INF")
