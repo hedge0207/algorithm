@@ -1,34 +1,26 @@
 from typing import List
 
-
 class Solution:
 
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        l = 0
-        r = len(nums) - 1
-        idx = -1
-        while l <= r:
-            mid = (l + r + 1) // 2
-            if nums[mid] < target:
-                l = mid + 1
-            elif nums[mid] > target:
-                r = mid - 1
+        st, ed = 0, len(nums)
+        while st < ed:
+            mid = (st + ed) // 2
+            if nums[mid] >= target:
+                ed = mid
             else:
-                idx = mid
-                break
+                st = mid + 1
+        lower_bound = st
 
-        st = ed = idx
-        while True:
-            flag = True
-            if st >= 1 and nums[st - 1] == target:
-                st -= 1
-                flag = False
-            print(ed)
-            if ed <= len(nums) - 2 and nums[ed + 1] == target:
-                ed += 1
-                flag = False
+        st, ed = 0, len(nums)
+        while st < ed:
+            mid = (st + ed) // 2
+            if nums[mid] > target:
+                ed = mid
+            else:
+                st = mid + 1
+        upper_bound = st
 
-            if flag:
-                break
-
-        return [st, ed]
+        if lower_bound > upper_bound - 1:
+            return [-1, -1]
+        return [lower_bound, upper_bound - 1]
