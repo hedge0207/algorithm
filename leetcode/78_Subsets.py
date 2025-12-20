@@ -1,14 +1,17 @@
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-
-        def dfs(subset, d, k):
-            result.append(subset)
-            if d == k:
+    def subsets(self, nums: list[int]) -> list[list[int]]:
+        ans = []
+        def backtrack(d, arr):
+            if d == len(nums):
+                ans.append(arr)
                 return
 
-            for i in range(d, k):
-                dfs(subset + [nums[i]], i + 1, k)
+            backtrack(d+1, arr+[nums[d]])
+            backtrack(d+1, arr)
+        backtrack(0, [])
+        return ans
 
-        result = []
-        dfs([], 0, len(nums))
-        return result
+
+
+s = Solution()
+print(s.subsets([1,2,3]))
