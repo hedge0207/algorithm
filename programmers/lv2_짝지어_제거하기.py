@@ -1,10 +1,10 @@
 def solution(s):
-    while len(s) >= 2:
-        for idx in range(len(s)-1):
-            if s[idx] == s[idx + 1]:
-                s = s[:idx] + s[idx+2:]
-                break
+    stack = []
+    for char in s:
+        if stack and stack[-1] == char:
+            stack.pop()
         else:
-            break
-
-    return 1 if not s else -1
+            stack.append(char)
+    if len(stack) == 0:
+        return 1
+    return 0
